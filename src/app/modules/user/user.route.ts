@@ -9,5 +9,6 @@ router.post(
   validateRequest(UserValidations.createUserSchema),
   UserControllers.createUser,
 );
+router.post('/login', UserControllers.userLogin);
 
 export const UserRoutes = router;
