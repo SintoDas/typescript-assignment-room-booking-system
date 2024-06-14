@@ -1,39 +1,43 @@
-import { TConferenceRoom } from './room.interface';
+import httpStatus from 'http-status';
+import AppError from '../../errors/AppError';
+import { TRoom } from './room.interface';
 import { Room } from './room.model';
 
-const createRoomIntoDbB = async (payload: TConferenceRoom) => {
+const createRoomIntoDbB = async (payload: TRoom) => {
+  const room = await Room.findOne({ roomNo: payload.roomNo });
+  if (room) {
+    throw new AppError(httpStatus.CONFLICT, 'Already exist!');
+  }
+
   const newRoom = await Room.create(payload);
   return newRoom;
 };
 const getSingleRoomFromDB = async (id: string) => {
-  const room = await Room.findById(id);
-  return room;
+  const singleRoom = await Room.findById(id);
+  return singleRoom;
 };
 const getAllRoomsFromDB = async () => {
   const rooms = await Room.find();
   return rooms;
 };
 
-const updateRoomIntoDB = async (
-  id: string,
-  payload: Partial<TConferenceRoom>,
-) => {
+const updateRoomIntoDB = async (id: string, payload: Partial<TRoom>) => {
   const modifiedData: Record<string, unknown> = payload;
-  const room = await Room.findByIdAndUpdate(id, modifiedData, {
+  const singleRoom = await Room.findByIdAndUpdate(id, modifiedData, {
     new: true,
     runValidators: true,
   });
-  return room;
+  return singleRoom;
 };
 const deleteRoomFromDB = async (id: string) => {
-  const room = await Room.findByIdAndUpdate(
+  const result = await Room.findByIdAndUpdate(
     id,
     { isDeleted: true },
     {
       new: true,
     },
   );
-  return room;
+  return result;
 };
 
 export const RoomServices = {

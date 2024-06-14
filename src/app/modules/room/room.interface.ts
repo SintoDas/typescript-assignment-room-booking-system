@@ -1,4 +1,4 @@
-export interface TConferenceRoom {
+export interface TRoom {
   name: string;
   roomNo: number;
   floorNo: number;

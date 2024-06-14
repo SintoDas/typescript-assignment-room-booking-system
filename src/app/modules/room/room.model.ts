@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
-import { TConferenceRoom } from './room.interface';
+import { TRoom } from './room.interface';
 
-const roomConferenceSchema = new Schema<TConferenceRoom>({
+const roomSchema = new Schema<TRoom>({
   name: {
     type: String,
     required: [true, 'Name is required'],
@@ -27,4 +27,4 @@ const roomConferenceSchema = new Schema<TConferenceRoom>({
   },
 });
 
-export const Room = model<TConferenceRoom>('room', roomConferenceSchema);
+export const Room = model<TRoom>('room', roomSchema);

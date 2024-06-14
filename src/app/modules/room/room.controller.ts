@@ -24,13 +24,14 @@ const getSingleRoom: RequestHandler = catchAsync(async (req, res) => {
   });
 });
 const getAllRooms: RequestHandler = catchAsync(async (req, res) => {
-  const room = await RoomServices.getAllRoomsFromDB();
+  console.log('test', req.user);
+  const rooms = await RoomServices.getAllRoomsFromDB();
 
   res.status(200).json({
     success: true,
     statusCode: httpStatus.OK,
     message: 'Rooms retrieved successfully',
-    data: room,
+    data: rooms,
   });
 });
 const updateRoom: RequestHandler = catchAsync(async (req, res) => {
