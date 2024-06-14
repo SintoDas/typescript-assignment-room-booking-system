@@ -3,8 +3,8 @@ import { USER_Role } from '../modules/user/user.constant';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../errors/AppError';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { User } from '../modules/user/user.model';
 import config from '../config';
+import { User } from '../modules/user/user.model';
 
 export const auth = (...requiredRoles: (keyof typeof USER_Role)[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {

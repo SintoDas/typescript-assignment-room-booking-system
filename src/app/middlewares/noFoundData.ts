@@ -1,8 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 
+export interface CustomResponse extends Response {
+  noDataFound?: () => void;
+}
+
 export const noDataFound = (
   req: Request,
-  res: Response,
+  res: CustomResponse,
   next: NextFunction,
 ) => {
   res.noDataFound = () => {

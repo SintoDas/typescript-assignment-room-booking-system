@@ -8,7 +8,7 @@ import handleZodError from '../errors/handleZodError';
 import { TErrorSources } from '../errors/interface/error.interface';
 import { ZodError } from 'zod';
 
-const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
+const globalErrorHandler: ErrorRequestHandler = (err, req, res) => {
   //setting default values
   let statusCode = 500;
   let message = 'Something went wrong!';

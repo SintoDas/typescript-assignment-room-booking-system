@@ -3,7 +3,7 @@ import { BookingControllers } from './booking.controller';
 import { validateRequest } from '../../middlewares/validateRequest';
 import { BookingValidations } from './booking.validation';
 import { USER_Role } from '../user/user.constant';
-import { auth } from '../../middlewares/Auth';
+import { auth } from '../../middlewares/auth';
 const router = express.Router();
 router.post(
   '/',

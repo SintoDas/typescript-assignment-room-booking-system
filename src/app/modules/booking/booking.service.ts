@@ -1,3 +1,4 @@
+import { JwtPayload } from 'jsonwebtoken';
 import { Room } from '../room/room.model';
 import { Slot } from '../slot/slot.model';
 import { User } from '../user/user.model';
@@ -52,7 +53,7 @@ const getAllBookingsFromDB = async () => {
     .populate('user');
   return bookings;
 };
-const getUserBookingsFromDB = async (userId: string) => {
+const getUserBookingsFromDB = async (userId: JwtPayload) => {
   const userBookings = await Booking.find({ userId })
     .populate('room')
     .populate('slots')

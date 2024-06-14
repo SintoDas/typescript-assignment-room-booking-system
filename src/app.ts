@@ -17,7 +17,7 @@ app.use('/api', router);
 app.use(noDataFound);
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
+  res.send('Hi, welcome to room booking application!!');
 });
 // notFound middleware
 app.use(notFound);

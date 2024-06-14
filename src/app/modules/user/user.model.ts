@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, HydratedDocument } from 'mongoose';
 import { TUser, UserModel } from './user.interface';
 import { USER_Role } from './user.constant';
 import bcrypt from 'bcrypt';
@@ -17,7 +17,7 @@ const userSchema = new Schema<TUser, UserModel>({
   password: {
     type: String,
     required: [true, 'Password is required'],
-    select: 0,
+    select: 0, // Set select to false
   },
   phone: { type: String, required: [true, 'Phone is required'] },
   address: { type: String, required: [true, 'Address is required'] },
@@ -27,19 +27,22 @@ const userSchema = new Schema<TUser, UserModel>({
     enum: Object.keys(USER_Role),
   },
 });
+
 userSchema.pre('save', async function (next) {
-  const user = this;
-  user.password = await bcrypt.hash(
-    user.password,
-    Number(config.bcrypt_salt_round),
-  );
+  const user = this as HydratedDocument<TUser>;
+  if (user.isModified('password')) {
+    user.password = await bcrypt.hash(
+      user.password,
+      Number(config.bcrypt_salt_round),
+    );
+  }
   next();
 });
 
-// set '' after saving password
 userSchema.post('save', function (doc, next) {
   doc.password = '';
   next();
 });
 
 export const User = model<TUser, UserModel>('user', userSchema);
+export { userSchema };

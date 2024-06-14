@@ -48,7 +48,10 @@ const getAllSlotsDataFromDB = async (payload: {
   date: string;
   roomId: string;
 }) => {
-  const slotsData = await Slot.find();
+  const { date, roomId } = payload;
+
+  // Assuming you want to find slots based on date and roomId
+  const slotsData = await Slot.find({ date, room: roomId });
   return slotsData;
 };
 

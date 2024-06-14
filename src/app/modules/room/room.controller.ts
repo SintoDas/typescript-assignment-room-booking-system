@@ -24,7 +24,6 @@ const getSingleRoom: RequestHandler = catchAsync(async (req, res) => {
   });
 });
 const getAllRooms: RequestHandler = catchAsync(async (req, res) => {
-  console.log('test', req.user);
   const rooms = await RoomServices.getAllRoomsFromDB();
 
   res.status(200).json({

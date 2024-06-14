@@ -2,8 +2,9 @@ import express from 'express';
 import { RoomControllers } from './room.controller';
 import { validateRequest } from '../../middlewares/validateRequest';
 import { RoomValidations } from './room.validation';
-import { auth } from '../../middlewares/Auth';
 import { USER_Role } from '../user/user.constant';
+import { auth } from '../../middlewares/auth';
+
 const router = express.Router();
 router.post(
   '/',
